@@ -13,15 +13,12 @@ class _HomeTabState extends State<HomeTab> {
     return Scaffold(
       body: Stack(children: [
         Container(
-          // height: 200,
-          // width: 200,
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/wallpaper.jpg'),
               fit: BoxFit.cover,
             ),
           ),
-          // child: Image.asset('assets/images/wallpaper.jpg'),
         ),
         AppBar(
           backgroundColor: Colors.transparent,

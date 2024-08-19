@@ -12,7 +12,17 @@ class _DiscoverTabState extends State<DiscoverTab> {
   Widget build(BuildContext context) {
     return const Center(
         child: Column(
-      children: [GridViewWidget(), OrientationBuilderWidget()],
+      children: [
+        GridViewWidget(),
+        Text(
+          "Rotate screen to change grid view",
+          style: TextStyle(color: Colors.red),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        OrientationBuilderWidget()
+      ],
     ));
   }
 }
