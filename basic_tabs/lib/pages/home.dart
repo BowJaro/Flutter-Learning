@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'birthdays.dart';
 import 'gratitude.dart';
 import 'reminders.dart';
+import 'slivers.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -19,7 +20,7 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: 3);
+    _tabController = TabController(vsync: this, length: 4);
   }
 
   @override
@@ -38,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage>
           Birthdays(),
           Gratitude(),
           Reminders(),
+          SilverPage(),
         ],
       )),
       appBar: AppBar(),
@@ -49,15 +51,19 @@ class _MyHomePageState extends State<MyHomePage>
           tabs: const [
             Tab(
               icon: Icon(Icons.cake),
-              text: 'Birthdays',
+              text: 'List View',
             ),
             Tab(
               icon: Icon(Icons.sentiment_satisfied),
-              text: 'Gratitude',
+              text: 'Grid View',
             ),
             Tab(
               icon: Icon(Icons.access_alarm),
-              text: 'Reminders',
+              text: 'Stack',
+            ),
+            Tab(
+              icon: Icon(Icons.grid_3x3),
+              text: 'Sliver',
             ),
           ],
         ),
