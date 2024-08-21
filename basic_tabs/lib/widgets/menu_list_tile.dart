@@ -1,3 +1,4 @@
+import 'package:basic_tabs/pages/interactivity.dart';
 import 'package:basic_tabs/pages/weather_page.dart';
 import 'package:flutter/material.dart';
 
@@ -66,6 +67,19 @@ class _MenuListTileWidgetState extends State<MenuListTileWidget> {
               context,
               MaterialPageRoute(
                 builder: (context) => const WeatherPage(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.gesture),
+          title: const Text('Interactivity'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const InteractivityPage(),
               ),
             );
           },

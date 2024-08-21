@@ -18,7 +18,11 @@ class _WeatherPageState extends State<WeatherPage> {
         ),
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.black54),
-        leading: IconButton(icon: const Icon(Icons.menu), onPressed: () {}),
+        leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
         actions: <Widget>[
           IconButton(icon: const Icon(Icons.cloud_queue), onPressed: () {})
         ],
