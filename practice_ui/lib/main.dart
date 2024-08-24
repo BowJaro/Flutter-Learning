@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:practice_ui/pages/bookmark.dart';
 import 'package:practice_ui/pages/home.dart';
 import 'package:practice_ui/pages/news_feed.dart';
 
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Practice UI',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
         useMaterial3: true,
       ),
       home: const MyPageManager(),
@@ -32,32 +34,30 @@ class MyPageManager extends StatefulWidget {
 }
 
 class _MyPageManagerState extends State<MyPageManager> {
-  List<Widget> tabs = const [HomePage(), NewsFeedPage()];
+  List<Widget> tabs = const [HomePage(), NewsFeedPage(), BookmarkPage()];
   List<BottomNavigationBarItem> tabItems = const [
     BottomNavigationBarItem(
       icon: Icon(Icons.location_on),
-      label: 'Home',
+      label: 'Explore',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.feed),
       label: 'Feed',
     ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.bookmark),
+      label: 'Saved',
+    ),
   ];
-  int selectedTab = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: tabs[selectedTab],
-      bottomNavigationBar: BottomNavigationBar(
-        items: tabItems,
-        onTap: (value) {
-          setState(() {
-            selectedTab = value;
-            print("This is selected tab $selectedTab");
-          });
-        },
-      ),
+      body: CupertinoTabScaffold(
+          tabBar: CupertinoTabBar(items: tabItems),
+          tabBuilder: (BuildContext context, int index) {
+            return tabs[index];
+          }),
     );
   }
 }
