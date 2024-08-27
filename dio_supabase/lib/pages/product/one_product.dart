@@ -1,4 +1,4 @@
-import 'package:dio_supabase/utl/api_call.dart';
+import 'package:dio_supabase/utils/product_api.dart';
 import 'package:flutter/material.dart';
 import 'package:dio_supabase/model/product.dart';
 

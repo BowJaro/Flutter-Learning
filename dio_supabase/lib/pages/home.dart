@@ -1,6 +1,6 @@
-import 'package:dio_supabase/pages/add_product.dart';
-import 'package:dio_supabase/pages/all_product.dart';
-import 'package:dio_supabase/pages/one_product.dart';
+import 'package:dio_supabase/pages/product/all_product.dart';
+import 'package:dio_supabase/pages/product/one_product.dart';
+import 'package:dio_supabase/pages/profile/all_profile.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,13 +33,16 @@ class _HomePageState extends State<HomePage> {
                   }));
                 },
                 child: const Text("View 1 product")),
+            const SizedBox(
+              height: 15,
+            ),
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const AddProductPage();
+                    return const AllProfilePage();
                   }));
                 },
-                child: const Text("Add product")),
+                child: const Text("All profiles")),
           ],
         ),
       ),

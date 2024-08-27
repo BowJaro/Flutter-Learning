@@ -1,7 +1,7 @@
 class MyProduct {
-  final String id;
-  final String name;
-  final int quantity;
+  String id;
+  String name;
+  int quantity;
 
   MyProduct({required this.id, required this.name, required this.quantity});
 

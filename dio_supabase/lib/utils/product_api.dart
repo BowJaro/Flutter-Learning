@@ -1,17 +1,19 @@
 import 'package:dio/dio.dart';
-import 'package:dio_supabase/apikey.dart';
+import 'package:dio_supabase/utils/apikey.dart';
 import 'package:dio_supabase/model/product.dart';
 
-Future<List<MyProduct>> getAllProduct() async {
-  Dio dio = Dio();
-  // Set base URL and headers
-  dio.options = BaseOptions(
+final Dio dio = Dio(
+  BaseOptions(
     baseUrl: baseUrl,
     headers: {
       'apikey': apiKey,
       'Authorization': 'Bearer $apiKey',
+      'Content-Type': 'application/json',
     },
-  );
+  ),
+);
+
+Future<List<MyProduct>> getAllProducts() async {
   try {
     final response = await dio.get('/Product?select=*');
     if (response.statusCode == 200) {
@@ -29,19 +31,9 @@ Future<List<MyProduct>> getAllProduct() async {
 }
 
 Future<MyProduct?> getProduct({required String id}) async {
-  Dio dio = Dio();
-  // Set base URL and headers
-  dio.options = BaseOptions(
-    baseUrl: baseUrl,
-    headers: {
-      'apikey': apiKey,
-      'Authorization': 'Bearer $apiKey',
-    },
-  );
-
   try {
     final response = await dio.get(
-      '/Product?id=eq.$id&select=*', // Use id=eq.$id syntax for filtering
+      '/Product?id=eq.$id&select=*',
     );
     if (response.statusCode == 200) {
       // Check if data is empty (no product found)
@@ -61,24 +53,10 @@ Future<MyProduct?> getProduct({required String id}) async {
 }
 
 Future<bool> addProduct({required MyProduct product}) async {
-  Dio dio = Dio();
-  // Set base URL and headers
-  dio.options = BaseOptions(
-    baseUrl: baseUrl,
-    headers: {
-      'apikey': apiKey,
-      'Authorization': 'Bearer $apiKey',
-      'Content-Type': 'application/json',
-      'Prefer': 'return=minimal', // Optional: Request minimal data on insert
-    },
-  );
-
   try {
-    var productJson = product.toJson();
-    print("This is productJson $productJson");
     final response = await dio.post(
       '/Product',
-      data: productJson, // Convert product to a JSON map
+      data: product.toJson(),
     );
     if (response.statusCode == 201) {
       return true;
@@ -87,5 +65,39 @@ Future<bool> addProduct({required MyProduct product}) async {
     }
   } on DioException catch (e) {
     throw Exception('Error adding product: ${e.message}');
+  }
+}
+
+Future<bool> updateProduct({required MyProduct product}) async {
+  try {
+    var productJson = product.toJson();
+
+    final response = await dio.patch(
+      '/Product?id=eq.${product.id}',
+      data: productJson,
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 204) {
+      return true;
+    } else {
+      throw Exception('Failed to update product: ${response.statusCode}');
+    }
+  } on DioException catch (e) {
+    throw Exception('Error updating product: ${e.message}');
+  }
+}
+
+Future<bool> deleteProduct({required String id}) async {
+  try {
+    final response = await dio.delete(
+      '/Product?id=eq.$id',
+    );
+    if (response.statusCode == 200 || response.statusCode == 204) {
+      return true;
+    } else {
+      throw Exception('Failed to delete product: ${response.statusCode}');
+    }
+  } on DioException catch (e) {
+    throw Exception('Error deleting product: ${e.message}');
   }
 }
